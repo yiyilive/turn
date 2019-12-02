@@ -13,7 +13,6 @@ import (
 	"github.com/pion/transport/vnet"
 	"github.com/pion/turn/internal/client"
 	"github.com/pion/turn/internal/proto"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -421,7 +420,7 @@ func (c *Client) handleSTUNMessage(data []byte, from net.Addr) error {
 
 	msg := &stun.Message{Raw: raw}
 	if err := msg.Decode(); err != nil {
-		return errors.Wrap(err, "failed to decode STUN message")
+		return fmt.Errorf("Failed to decode STUN message: %w", err)
 	}
 
 	if msg.Type.Class == stun.ClassRequest {

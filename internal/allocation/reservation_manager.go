@@ -2,7 +2,6 @@ package allocation
 
 import (
 	"fmt"
-	"net"
 	"sync"
 	"time"
 )
@@ -54,19 +53,20 @@ func (m *ReservationManager) GetReservation(reservationToken string) (int, bool)
 
 // GetRandomEvenPort returns a random un-allocated udp4 port
 func GetRandomEvenPort() (int, error) {
-	listener, err := net.ListenPacket("udp4", "0.0.0.0:0")
-	if err != nil {
-		return 0, err
-	}
+	return 0, fmt.Errorf("TODO")
+	// listener, err := net.ListenPacket("udp4", "0.0.0.0:0")
+	// if err != nil {
+	// 	return 0, err
+	// }
 
-	addr, ok := listener.LocalAddr().(*net.UDPAddr)
-	if !ok {
-		return 0, fmt.Errorf("failed to cast net.Addr to *net.UDPAddr")
-	} else if err := listener.Close(); err != nil {
-		return 0, err
-	} else if addr.Port%2 == 1 {
-		return GetRandomEvenPort()
-	}
+	// addr, ok := listener.LocalAddr().(*net.UDPAddr)
+	// if !ok {
+	// 	return 0, fmt.Errorf("failed to cast net.Addr to *net.UDPAddr")
+	// } else if err := listener.Close(); err != nil {
+	// 	return 0, err
+	// } else if addr.Port%2 == 1 {
+	// 	return GetRandomEvenPort()
+	// }
 
-	return addr.Port, nil
+	// return addr.Port, nil
 }

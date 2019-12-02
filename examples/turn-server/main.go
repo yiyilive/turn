@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/signal"
 	"regexp"
-	"strconv"
 	"syscall"
 	"time"
 
@@ -24,6 +23,7 @@ func createAuthHandler(usersMap map[string]string) turn.AuthHandler {
 }
 
 func main() {
+	var err error
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
@@ -46,10 +46,6 @@ func main() {
 	if udpPortStr == "" {
 		udpPortStr = "3478"
 	}
-	udpPort, err := strconv.Atoi(udpPortStr)
-	if err != nil {
-		log.Panic(err)
-	}
 
 	var channelBindTimeout time.Duration
 	channelBindTimeoutStr := os.Getenv("CHANNEL_BIND_TIMEOUT")
@@ -60,24 +56,33 @@ func main() {
 		}
 	}
 
-	s := turn.NewServer(&turn.ServerConfig{
+	udpListener, err := net.ListenPacket("udp4", "0.0.0.0:"+udpPortStr)
+	if err != nil {
+		log.Panicf("Failed to create TURN server listener: %s", err)
+	}
+
+	s, err := turn.NewServer(turn.ServerConfig{
 		Realm:              realm,
 		AuthHandler:        createAuthHandler(usersMap),
 		ChannelBindTimeout: channelBindTimeout,
-		ListeningPort:      udpPort,
-		LoggerFactory:      logging.NewDefaultLoggerFactory(),
-		Software:           os.Getenv("SOFTWARE"),
+		PacketConnConfigs: []turn.PacketConnConfig{
+			{
+				PacketConn: udpListener,
+				RelayAddressGenerator: &turn.RelayAddressGeneratorStatic{
+					RelayAddress: net.ParseIP("127.0.0.1"),
+					Network:      "udp4",
+					Address:      "127.0.0.1",
+				},
+			},
+		},
+		LoggerFactory: logging.NewDefaultLoggerFactory(),
 	})
-
-	err = s.Start()
 	if err != nil {
 		log.Panic(err)
 	}
 
 	<-sigs
-
-	err = s.Close()
-	if err != nil {
+	if err = s.Close(); err != nil {
 		log.Panic(err)
 	}
 }

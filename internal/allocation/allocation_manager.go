@@ -8,35 +8,42 @@ import (
 
 	"github.com/pion/logging"
 	"github.com/pion/transport/vnet"
-	"github.com/pkg/errors"
 )
 
 // ManagerConfig a bag of config params for Manager.
 type ManagerConfig struct {
-	LeveledLogger logging.LeveledLogger
-	Net           *vnet.Net
+	LeveledLogger         logging.LeveledLogger
+	Net                   *vnet.Net
+	RelayAddressGenerator func() (net.PacketConn, net.Addr, error)
 }
 
 // Manager is used to hold active allocations
 type Manager struct {
-	lock        sync.RWMutex
-	allocations map[string]*Allocation
-	extIPMap    map[string]net.IP
-	log         logging.LeveledLogger
-	net         *vnet.Net
+	lock                  sync.RWMutex
+	allocations           map[string]*Allocation
+	log                   logging.LeveledLogger
+	net                   *vnet.Net
+	relayAddressGenerator func() (net.PacketConn, net.Addr, error)
 }
 
 // NewManager creates a new instance of Manager.
-func NewManager(config *ManagerConfig) *Manager {
+func NewManager(config ManagerConfig) (*Manager, error) {
 	if config.Net == nil {
 		config.Net = vnet.NewNet(nil) // defaults to native operation
 	}
-	return &Manager{
-		log:         config.LeveledLogger,
-		net:         config.Net,
-		allocations: make(map[string]*Allocation, 64),
-		extIPMap:    make(map[string]net.IP),
+
+	if config.RelayAddressGenerator == nil {
+		return nil, fmt.Errorf("RelayAddressGenerator must be set")
+	} else if config.LeveledLogger == nil {
+		return nil, fmt.Errorf("LeveledLogger must be set")
 	}
+
+	return &Manager{
+		log:                   config.LeveledLogger,
+		net:                   config.Net,
+		allocations:           make(map[string]*Allocation, 64),
+		relayAddressGenerator: config.RelayAddressGenerator,
+	}, nil
 }
 
 // GetAllocation fetches the allocation matching the passed FiveTuple
@@ -64,54 +71,36 @@ func (m *Manager) Close() error {
 func (m *Manager) CreateAllocation(
 	fiveTuple *FiveTuple,
 	turnSocket net.PacketConn,
-	relayIP net.IP, // nolint:interfacer
 	requestedPort int,
 	lifetime time.Duration) (*Allocation, error) {
 
-	if fiveTuple == nil {
-		return nil, errors.Errorf("Allocations must not be created with nil FivTuple")
-	}
-	if fiveTuple.SrcAddr == nil {
-		return nil, errors.Errorf("Allocations must not be created with nil FiveTuple.SrcAddr")
-	}
-	if fiveTuple.DstAddr == nil {
-		return nil, errors.Errorf("Allocations must not be created with nil FiveTuple.DstAddr")
-	}
-	if a := m.GetAllocation(fiveTuple); a != nil {
-		return nil, errors.Errorf("Allocation attempt created with duplicate FiveTuple %v", fiveTuple)
-	}
-	if turnSocket == nil {
-		return nil, errors.Errorf("Allocations must not be created with nil turnSocket")
-	}
-	if lifetime == 0 {
-		return nil, errors.Errorf("Allocations must not be created with a lifetime of 0")
+	switch {
+	case fiveTuple == nil:
+		return nil, fmt.Errorf("Allocations must not be created with nil FivTuple")
+	case fiveTuple.SrcAddr == nil:
+		return nil, fmt.Errorf("Allocations must not be created with nil FiveTuple.SrcAddr")
+	case fiveTuple.DstAddr == nil:
+		return nil, fmt.Errorf("Allocations must not be created with nil FiveTuple.DstAddr")
+	case turnSocket == nil:
+		return nil, fmt.Errorf("Allocations must not be created with nil turnSocket")
+	case lifetime == 0:
+		return nil, fmt.Errorf("Allocations must not be created with a lifetime of 0")
 	}
 
+	if a := m.GetAllocation(fiveTuple); a != nil {
+		return nil, fmt.Errorf("Allocation attempt created with duplicate FiveTuple %v", fiveTuple)
+	}
 	a := NewAllocation(turnSocket, fiveTuple, m.log)
 
-	conn, err := m.net.ListenPacket(
-		"udp4",
-		fmt.Sprintf("%s:%d", relayIP.String(), requestedPort))
+	conn, relayAddr, err := m.relayAddressGenerator()
 	if err != nil {
 		return nil, err
 	}
 
-	m.log.Debugf("listening on relay addr: %s", conn.LocalAddr().String())
-
 	a.RelaySocket = conn
+	a.RelayAddr = relayAddr
 
-	// Determine RelayAddr.
-	// If there's a corresponding external IP address, replace
-	// the relay IP with the external one.
-	relayAddr := conn.LocalAddr().(*net.UDPAddr)
-	if extIP, ok := m.extIPMap[relayAddr.IP.String()]; ok {
-		a.RelayAddr = &net.UDPAddr{
-			IP:   extIP,
-			Port: relayAddr.Port,
-		}
-	} else {
-		a.RelayAddr = conn.LocalAddr()
-	}
+	m.log.Debugf("listening on relay addr: %s", a.RelayAddr.String())
 
 	a.lifetimeTimer = time.AfterFunc(lifetime, func() {
 		m.DeleteAllocation(a.fiveTuple)
@@ -141,12 +130,4 @@ func (m *Manager) DeleteAllocation(fiveTuple *FiveTuple) {
 	if err := allocation.Close(); err != nil {
 		m.log.Errorf("Failed to close allocation: %v", err)
 	}
-}
-
-// AddExternalIPMapping add a external IP address mapping.
-func (m *Manager) AddExternalIPMapping(extIP, locIP net.IP) {
-	m.lock.Lock()
-	defer m.lock.Unlock()
-
-	m.extIPMap[locIP.String()] = extIP
 }
