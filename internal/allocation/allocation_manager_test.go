@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/turn/internal/proto"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 func TestManager(t *testing.T) {

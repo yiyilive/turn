@@ -8,12 +8,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/stun"
-	"github.com/pion/transport/vnet"
-	"github.com/pion/turn/internal/client"
-	"github.com/pion/turn/internal/proto"
 	"github.com/pkg/errors"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/transport/vnet"
+	"github.com/yiyilive/turn/internal/client"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 const (

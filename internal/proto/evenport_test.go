@@ -3,7 +3,7 @@ package proto
 import (
 	"testing"
 
-	"github.com/pion/stun"
+	"github.com/yiyilive/stun"
 )
 
 func TestEvenPort(t *testing.T) {

@@ -3,7 +3,7 @@ package proto
 import (
 	"testing"
 
-	"github.com/pion/stun"
+	"github.com/yiyilive/stun"
 )
 
 func TestDontFragment(t *testing.T) {

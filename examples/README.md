@@ -6,13 +6,13 @@ It demonstrates how to write a TURN server and run it.
 
 It takes a few environment variables:
 * USERS   : &lt;username&gt;=&lt;password&gt;[,&lt;username&gt;=&lt;password&gt;,...] pairs
-* REALM   : Realm name (defaults to "pion.ly")
+* REALM   : Realm name (defaults to "yiyilive.ly")
 * UDP_PORT: Listening port (defaults to 3478)
 
 
 ```sh
 $ go build
-$ PIONS_LOG_INFO=all USERS=user=pass REALM=pion.ly ./turn-server
+$ yiyiliveS_LOG_INFO=all USERS=user=pass REALM=yiyilive.ly ./turn-server
 turn INFO: 2019/07/14 14:40:17 Listening on udp:10.0.0.135:3478
 ```
 

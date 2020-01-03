@@ -1,6 +1,6 @@
 package proto
 
-import "github.com/pion/stun"
+import "github.com/yiyilive/stun"
 
 // EvenPort represents EVEN-PORT attribute.
 //

@@ -8,15 +8,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/turn"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/turn"
 )
 
 func main() {
 	host := flag.String("host", "", "TURN Server name.")
 	port := flag.Int("port", 3478, "Listening port.")
 	user := flag.String("user", "", "A pair of username and password (e.g. \"user=pass\")")
-	realm := flag.String("realm", "pion.ly", "Realm (defaults to \"pion.ly\")")
+	realm := flag.String("realm", "yiyilive.ly", "Realm (defaults to \"yiyilive.ly\")")
 	ping := flag.Bool("ping", false, "Run ping test")
 	flag.Parse()
 

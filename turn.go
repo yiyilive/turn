@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pion/stun"
-	"github.com/pion/turn/internal/allocation"
-	"github.com/pion/turn/internal/ipnet"
-	"github.com/pion/turn/internal/proto"
 	"github.com/pkg/errors"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/turn/internal/allocation"
+	"github.com/yiyilive/turn/internal/ipnet"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 const (

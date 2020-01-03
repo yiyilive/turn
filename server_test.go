@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/turn/internal/proto"
 	"github.com/stretchr/testify/assert"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 func TestServer(t *testing.T) {
@@ -27,7 +27,7 @@ func TestServer(t *testing.T) {
 				}
 				return "", false
 			},
-			Realm:         "pion.ly",
+			Realm:         "yiyilive.ly",
 			LoggerFactory: loggerFactory,
 		})
 
@@ -83,7 +83,7 @@ func TestServer(t *testing.T) {
 				}
 				return "", false
 			},
-			Realm:         "pion.ly",
+			Realm:         "yiyilive.ly",
 			LoggerFactory: loggerFactory,
 		})
 
@@ -116,7 +116,7 @@ func TestServer(t *testing.T) {
 				}
 				return "", false
 			},
-			Realm:         "pion.ly",
+			Realm:         "yiyilive.ly",
 			LoggerFactory: loggerFactory,
 		})
 
@@ -157,7 +157,7 @@ func TestServer(t *testing.T) {
 				}
 				return "", false
 			},
-			Realm:         "pion.ly",
+			Realm:         "yiyilive.ly",
 			Software:      testSoftware,
 			LoggerFactory: loggerFactory,
 		}

@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/turn"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/turn"
 )
 
 func createAuthHandler(usersMap map[string]string) turn.AuthHandler {

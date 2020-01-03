@@ -6,11 +6,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/stun"
-	"github.com/pion/turn/internal/ipnet"
-	"github.com/pion/turn/internal/proto"
 	"github.com/pkg/errors"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/turn/internal/ipnet"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 // Allocation is tied to a FiveTuple and relays traffic

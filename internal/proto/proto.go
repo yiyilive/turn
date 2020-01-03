@@ -6,7 +6,7 @@ package proto
 import (
 	"encoding/binary"
 
-	"github.com/pion/stun"
+	"github.com/yiyilive/stun"
 )
 
 // bin is shorthand for binary.BigEndian.

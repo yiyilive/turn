@@ -3,7 +3,7 @@ package proto
 import (
 	"time"
 
-	"github.com/pion/stun"
+	"github.com/yiyilive/stun"
 )
 
 // DefaultLifetime in RFC 5766 is 10 minutes.

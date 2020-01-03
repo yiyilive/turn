@@ -1,41 +1,41 @@
 <h1 align="center">
-  <a href="https://pion.ly"><img src="./.github/gopher-pion.png" alt="Pion TURN" height="250px"></a>
+  <a href="https://yiyilive.ly"><img src="./.github/gopher-yiyilive.png" alt="yiyilive TURN" height="250px"></a>
   <br>
-  Pion TURN
+  yiyilive TURN
   <br>
 </h1>
 <h4 align="center">A toolkit for building TURN clients and servers in Go</h4>
 <p align="center">
-  <a href="https://pion.ly"><img src="https://img.shields.io/badge/pion-turn-gray.svg?longCache=true&colorB=brightgreen" alt="Pion TURN"></a>
-  <a href="http://gophers.slack.com/messages/pion"><img src="https://img.shields.io/badge/join-us%20on%20slack-gray.svg?longCache=true&logo=slack&colorB=brightgreen" alt="Slack Widget"></a>
-  <a href="https://github.com/pion/awesome-pion" alt="Awesome Pion"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"></a>
+  <a href="https://yiyilive.ly"><img src="https://img.shields.io/badge/yiyilive-turn-gray.svg?longCache=true&colorB=brightgreen" alt="yiyilive TURN"></a>
+  <a href="http://gophers.slack.com/messages/yiyilive"><img src="https://img.shields.io/badge/join-us%20on%20slack-gray.svg?longCache=true&logo=slack&colorB=brightgreen" alt="Slack Widget"></a>
+  <a href="https://github.com/yiyilive/awesome-yiyilive" alt="Awesome yiyilive"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"></a>
   <br>
-  <a href="https://travis-ci.org/pion/turn"><img src="https://travis-ci.org/pion/turn.svg?branch=master" alt="Build Status"></a>
-  <a href="https://godoc.org/github.com/pion/turn"><img src="https://godoc.org/github.com/pion/turn?status.svg" alt="GoDoc"></a>
-  <a href="https://codecov.io/gh/pion/turn"><img src="https://codecov.io/gh/pion/turn/branch/master/graph/badge.svg" alt="Coverage Status"></a>
-  <a href="https://goreportcard.com/report/github.com/pion/turn"><img src="https://goreportcard.com/badge/github.com/pion/turn" alt="Go Report Card"></a>
-  <a href="https://www.codacy.com/app/pion/turn"><img src="https://api.codacy.com/project/badge/Grade/d53ec6c70576476cb16c140c2964afde" alt="Codacy Badge"></a>
+  <a href="https://travis-ci.org/yiyilive/turn"><img src="https://travis-ci.org/yiyilive/turn.svg?branch=master" alt="Build Status"></a>
+  <a href="https://godoc.org/github.com/yiyilive/turn"><img src="https://godoc.org/github.com/yiyilive/turn?status.svg" alt="GoDoc"></a>
+  <a href="https://codecov.io/gh/yiyilive/turn"><img src="https://codecov.io/gh/yiyilive/turn/branch/master/graph/badge.svg" alt="Coverage Status"></a>
+  <a href="https://goreportcard.com/report/github.com/yiyilive/turn"><img src="https://goreportcard.com/badge/github.com/yiyilive/turn" alt="Go Report Card"></a>
+  <a href="https://www.codacy.com/app/yiyilive/turn"><img src="https://api.codacy.com/project/badge/Grade/d53ec6c70576476cb16c140c2964afde" alt="Codacy Badge"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 </p>
 <br>
 
-Pion TURN is a Go toolkit for build TURN servers and clients. We wrote it to solve problems we had when building RTC projects.
+yiyilive TURN is a Go toolkit for build TURN servers and clients. We wrote it to solve problems we had when building RTC projects.
 
 * **Deployable** - Use modern tooling of the Go ecosystem. Stop generating config files.
-* **Embeddable** - Include `pion/turn` in your existing applications. No need to manage another service.
+* **Embeddable** - Include `yiyilive/turn` in your existing applications. No need to manage another service.
 * **Extendable** - TURN as an API so you can easily integrate with your existing monitoring and metrics.
-* **Maintainable** - `pion/turn` is simple and well documented. Designed for learning and easy debugging.
+* **Maintainable** - `yiyilive/turn` is simple and well documented. Designed for learning and easy debugging.
 * **Portable** - Quickly deploy to multiple architectures/platforms just by setting an environment variable.
 * **Safe** - Stability and safety is important for network services. Go provides everything we need.
 * **Scalable** - Create allocations and mutate state at runtime. Designed to make scaling easy.
 
 # Examples
 We provide two simple client/server examples in [examples](examples). If more examples could be helpful please file an issue, we are always looking
-to expand and improve `pion/turn` to make it easier for developers.
+to expand and improve `yiyilive/turn` to make it easier for developers.
 
-You can also see `pion/turn` usage in [pion/ice](https://github.com/pion/ice)
+You can also see `yiyilive/turn` usage in [yiyilive/ice](https://github.com/yiyilive/ice)
 
-# [FAQ](https://github.com/pion/webrtc/wiki/FAQ)
+# [FAQ](https://github.com/yiyilive/webrtc/wiki/FAQ)
 
 ### RFCs
 #### Implemented
@@ -47,7 +47,7 @@ You can also see `pion/turn` usage in [pion/ice](https://github.com/pion/ice)
 * [RFC 6156: Traversal Using Relays around NAT (TURN) Extension for IPv6](https://tools.ietf.org/html/rfc6156)
 
 ### Community
-Pion has an active community on the [Golang Slack](https://pion.ly/slack). Sign up and join the **#pion** channel for discussions and support.
+yiyilive has an active community on the [Golang Slack](https://yiyilive.ly/slack). Sign up and join the **#yiyilive** channel for discussions and support.
 
 We are always looking to support **your projects**. Please reach out if you have something to build!
 

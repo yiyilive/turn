@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/transport/vnet"
 	"github.com/pkg/errors"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/transport/vnet"
 )
 
 // ManagerConfig a bag of config params for Manager.

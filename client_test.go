@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/transport/vnet"
 	"github.com/stretchr/testify/assert"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/transport/vnet"
 )
 
 func createListeningTestClient(t *testing.T, loggerFactory logging.LoggerFactory) (*Client, bool) {

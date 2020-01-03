@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/pion/stun"
+	"github.com/yiyilive/stun"
 )
 
 func TestReservationToken(t *testing.T) {

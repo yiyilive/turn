@@ -3,7 +3,7 @@ package turn
 import (
 	"net"
 
-	"github.com/pion/stun"
+	"github.com/yiyilive/stun"
 )
 
 // Sender is responsible for building a message and sending it to the given addr.

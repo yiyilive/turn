@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/transport/vnet"
 	"github.com/stretchr/testify/assert"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/transport/vnet"
 )
 
 type VNet struct {
@@ -98,7 +98,7 @@ func buildVNet() (*VNet, error) {
 			}
 			return "", false
 		},
-		Realm:         "pion.ly",
+		Realm:         "yiyilive.ly",
 		Net:           net0,
 		LoggerFactory: loggerFactory,
 	})
@@ -109,15 +109,15 @@ func buildVNet() (*VNet, error) {
 	}
 
 	// register host names
-	err = wan.AddHost("stun.pion.ly", "1.2.3.4")
+	err = wan.AddHost("stun.yiyilive.ly", "1.2.3.4")
 	if err != nil {
 		return nil, err
 	}
-	err = wan.AddHost("turn.pion.ly", "1.2.3.4")
+	err = wan.AddHost("turn.yiyilive.ly", "1.2.3.4")
 	if err != nil {
 		return nil, err
 	}
-	err = wan.AddHost("echo.pion.ly", "1.2.3.5")
+	err = wan.AddHost("echo.yiyilive.ly", "1.2.3.5")
 	if err != nil {
 		return nil, err
 	}
@@ -196,8 +196,8 @@ func TestServerVNet(t *testing.T) {
 
 		log.Debug("creating a client.")
 		client, err := NewClient(&ClientConfig{
-			STUNServerAddr: "stun.pion.ly:3478",
-			TURNServerAddr: "turn.pion.ly:3478",
+			STUNServerAddr: "stun.yiyilive.ly:3478",
+			TURNServerAddr: "turn.yiyilive.ly:3478",
 			Username:       "user",
 			Password:       "pass",
 			Conn:           lconn,

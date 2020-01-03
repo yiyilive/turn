@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/stun"
-	"github.com/pion/turn/internal/proto"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 const (

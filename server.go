@@ -11,19 +11,19 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/logging"
-	"github.com/pion/stun"
-	"github.com/pion/transport/vnet"
-	"github.com/pion/turn/internal/allocation"
-	"github.com/pion/turn/internal/proto"
 	"github.com/pkg/errors"
+	"github.com/yiyilive/logging"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/transport/vnet"
+	"github.com/yiyilive/turn/internal/allocation"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 const (
 	maxStunMessageSize = 1500
 )
 
-// AuthHandler is a callback used to handle incoming auth requests, allowing users to customize Pion TURN
+// AuthHandler is a callback used to handle incoming auth requests, allowing users to customize yiyilive TURN
 // with custom behavior
 type AuthHandler func(username string, srcAddr net.Addr) (password string, ok bool)
 
@@ -39,7 +39,7 @@ type ServerConfig struct {
 	ListeningPort int
 	// LoggerFactory must be set for logging from this server.
 	LoggerFactory logging.LoggerFactory
-	// Net is used by pion developers. Do not use in your application.
+	// Net is used by yiyilive developers. Do not use in your application.
 	Net *vnet.Net
 	// Software is the STUN SOFTWARE attribute. Useful for debugging purpose.
 	Software string
@@ -52,7 +52,7 @@ type listener struct {
 	closeCh chan struct{}
 }
 
-// Server is an instance of the Pion TURN server
+// Server is an instance of the yiyilive TURN server
 type Server struct {
 	lock               sync.RWMutex
 	listeners          []*listener
@@ -71,7 +71,7 @@ type Server struct {
 	sender             Sender
 }
 
-// NewServer creates the Pion TURN server
+// NewServer creates the yiyilive TURN server
 func NewServer(config *ServerConfig) *Server {
 	log := config.LoggerFactory.NewLogger("turn")
 

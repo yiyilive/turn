@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/stun"
-	"github.com/pion/turn/internal/ipnet"
-	"github.com/pion/turn/internal/proto"
 	"github.com/stretchr/testify/assert"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/turn/internal/ipnet"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 func TestAllocation(t *testing.T) {

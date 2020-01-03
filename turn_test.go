@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pion/stun"
-	"github.com/pion/turn/internal/proto"
+	"github.com/yiyilive/stun"
+	"github.com/yiyilive/turn/internal/proto"
 )
 
 func TestAllocationLifeTime(t *testing.T) {
